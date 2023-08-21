@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{FE9BA828-12E8-4B92-9BE2-2BABE3FAEEF8}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="UDPClient.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="UDPServer.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="UDPClient">
+        <MSBuild Projects="UDPClient.dproj"/>
+    </Target>
+    <Target Name="UDPClient:Clean">
+        <MSBuild Projects="UDPClient.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="UDPClient:Make">
+        <MSBuild Projects="UDPClient.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="UDPServer">
+        <MSBuild Projects="UDPServer.dproj"/>
+    </Target>
+    <Target Name="UDPServer:Clean">
+        <MSBuild Projects="UDPServer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="UDPServer:Make">
+        <MSBuild Projects="UDPServer.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="UDPClient;UDPServer"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="UDPClient:Clean;UDPServer:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="UDPClient:Make;UDPServer:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
