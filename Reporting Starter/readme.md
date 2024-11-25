@@ -2,7 +2,7 @@
 
 Dieses Demo zeigt den Aufbau einer einfachen Rechnung aus Bestelldaten. Es wird FastReport verwendet.
 
-FastReport ist in einer kostenlosen Embarcadero Edition und in erweiterten, kostenpflichtigen Versionen erhältlich. Nachfolgende eine *unverbindliche* Gegenüberstellung der Unterschiede:
+FastReport ist in einer kostenlosen Embarcadero Edition und in erweiterten, kostenpflichtigen Versionen erhältlich. Nachfolgend eine *unverbindliche* Gegenüberstellung der Unterschiede:
 
 | **Funktion**                            | **Embarcadero Edition**          | **Kommerzielle Versionen**                          |
 | --------------------------------------- | -------------------------------- | --------------------------------------------------- |
