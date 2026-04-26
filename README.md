@@ -10,6 +10,8 @@ A small collection of Delphi demos created for events, webinars, and experiments
 
 The repository is aimed at Delphi developers who enjoy learning from working code: database access with FireDAC, reporting, UDP communication, IDE extensions, and modern dockable user interfaces.
 
+Open `DelphiDemos.groupproj` in RAD Studio if you want all demo projects in one project group.
+
 ## Contents
 
 | Demo | Topic | Start here |

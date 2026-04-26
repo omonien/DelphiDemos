@@ -1,10 +1,19 @@
-unit DockedWindows.Toolbox.Form;
+﻿/// <summary>
+/// DockedWindows.Toolbox.Form
+/// Dockable toolbox form for the docking demo.
+/// </summary>
+///
+/// <remarks>
+/// Contains simple action buttons and hides on close so it can be restored from
+/// the main form's View menu without losing state.
+/// </remarks>
+///
+/// <copyright>
+/// Copyright © 2026 Olaf Monien
+/// Licensed under MIT
+/// </copyright>
 
-// Tool window. Becomes dockable through these properties (set in the .dfm):
-//   DragKind = dkDock
-//   DragMode = dmAutomatic
-// The OnClose handler hides the form instead of releasing it, so the user
-// can re-show it via the View menu without losing state.
+unit DockedWindows.Toolbox.Form;
 
 interface
 
@@ -13,6 +22,9 @@ uses
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
 
 type
+  /// <summary>
+  /// Dockable toolbox window with sample actions.
+  /// </summary>
   TFormToolbox = class(TForm)
     Header: TPanel;
     btnNew: TButton;

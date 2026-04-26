@@ -1,0 +1,30 @@
+# Delphi build output
+build/
+__history/
+__recovery/
+*.local
+*.identcache
+*.stat
+*.dcu
+*.dcp
+*.bpl
+*.drc
+*.map
+*.tds
+*.rsm
+*.res
+*.otares
+*.skincfg
+*.deployproj
+
+# Executables and generated reports
+*.exe
+*.dll
+*.pdf.tmp
+invoice_*.pdf
+
+# IDE and OS files
+.DS_Store
+Thumbs.db
+*.~*
+*.bak

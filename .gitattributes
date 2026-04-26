@@ -1,0 +1,11 @@
+*.pas text eol=crlf
+*.dpr text eol=crlf
+*.dpk text eol=crlf
+*.dfm text eol=crlf
+*.fmx text eol=crlf
+*.dproj text eol=crlf
+*.groupproj text eol=crlf
+*.md text eol=lf
+*.pdf binary
+*.png binary
+*.sqlite binary

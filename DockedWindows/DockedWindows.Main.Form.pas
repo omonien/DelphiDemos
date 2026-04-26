@@ -1,17 +1,19 @@
-unit DockedWindows.Main.Form;
+﻿/// <summary>
+/// DockedWindows.Main.Form
+/// Main form for the docked windows demo.
+/// </summary>
+///
+/// <remarks>
+/// Hosts the VCL dock sites, restores the initial docking layout, and exposes
+/// menu actions for showing dockable tool windows.
+/// </remarks>
+///
+/// <copyright>
+/// Copyright © 2026 Olaf Monien
+/// Licensed under MIT
+/// </copyright>
 
-// Demo: modern docked windows as an alternative to the legacy MDI mechanism.
-//
-// Key ingredients (all built-in VCL, no third-party libraries):
-//   - The main form contains TPanel dock sites (DockSite = True, UseDockManager = True)
-//     placed Left / Right / Bottom around a central client panel.
-//   - TSplitter components let the user resize the dock zones at runtime.
-//   - Each tool window (Toolbox, Properties, Log) is a regular TForm with
-//       DragKind = dkDock and DragMode = dmAutomatic
-//     so it can be dragged out of its dock zone, floated freely, or re-docked
-//     into any dock site - including stacked / tabbed docking on the same panel.
-//   - At startup we ManualDock the tool forms into their initial panels.
-//   - The View menu re-shows tool windows that the user has closed.
+unit DockedWindows.Main.Form;
 
 interface
 
@@ -21,6 +23,9 @@ uses
   Vcl.Menus, Vcl.StdCtrls, Vcl.ToolWin, Vcl.ImgList;
 
 type
+  /// <summary>
+  /// Hosts the workspace and the dock sites for the tool windows.
+  /// </summary>
   TFormMain = class(TForm)
     MainMenu: TMainMenu;
     miFile: TMenuItem;
@@ -55,6 +60,9 @@ type
     procedure ShowToolForm(AForm: TForm; ADockTarget: TWinControl);
     procedure DockInitialLayout;
   public
+    /// <summary>
+    /// Appends a message to the dockable log window.
+    /// </summary>
     procedure Log(const AMessage: string);
   end;
 
@@ -89,8 +97,6 @@ begin
   if not Assigned(AForm) then
     Exit;
 
-  // If the form is currently floating or docked elsewhere, undock it first
-  // so ManualDock can place it cleanly into the requested dock site.
   if AForm.HostDockSite <> nil then
     AForm.ManualDock(nil, nil, alNone);
 

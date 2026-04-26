@@ -1,4 +1,18 @@
-﻿unit UDPServer.Main.Form;
+﻿/// <summary>
+/// UDPServer.Main.Form
+/// Main form for the UDP sender demo.
+/// </summary>
+///
+/// <remarks>
+/// Encodes text as UTF-8 and sends it to the local client through Indy UDP.
+/// </remarks>
+///
+/// <copyright>
+/// Copyright © 2026 Olaf Monien
+/// Licensed under MIT
+/// </copyright>
+
+unit UDPServer.Main.Form;
 
 interface
 
@@ -7,15 +21,14 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, IdBaseComponent, IdComponent, IdUDPBase, IdUDPServer, Vcl.StdCtrls;
 
 type
+  /// <summary>
+  /// Sends the entered text as a local UDP packet.
+  /// </summary>
   TFormMainServer = class(TForm)
     UDPServer: TIdUDPServer;
-    Button1: TButton;
-    Edit1: TEdit;
-    procedure Button1Click(Sender: TObject);
-  private
-    { Private declarations }
-  public
-    { Public declarations }
+    ButtonSend: TButton;
+    EditMessage: TEdit;
+    procedure ButtonSendClick(Sender: TObject);
   end;
 
 var
@@ -29,12 +42,11 @@ uses
 {$R *.dfm}
 
 
-procedure TFormMainServer.Button1Click(Sender: TObject);
+procedure TFormMainServer.ButtonSendClick(Sender: TObject);
 var
-  LBuffer: TidBytes;
+  LBuffer: TIdBytes;
 begin
-  // TidBytes is an array of byte, just like TBytes. It just existed earlier.
-  LBuffer := TidBytes(TEncoding.UTF8.GetBytes(Edit1.text));
+  LBuffer := TIdBytes(TEncoding.UTF8.GetBytes(EditMessage.Text));
   UDPServer.SendBuffer('127.0.0.1', 7777, LBuffer);
 end;
 

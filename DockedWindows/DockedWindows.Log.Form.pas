@@ -1,6 +1,19 @@
-unit DockedWindows.Log.Form;
+﻿/// <summary>
+/// DockedWindows.Log.Form
+/// Dockable log form for the docking demo.
+/// </summary>
+///
+/// <remarks>
+/// Collects runtime messages from the demo and can be docked or floated like
+/// the other tool windows.
+/// </remarks>
+///
+/// <copyright>
+/// Copyright © 2026 Olaf Monien
+/// Licensed under MIT
+/// </copyright>
 
-// Bottom tool window. Same docking pattern as the others.
+unit DockedWindows.Log.Form;
 
 interface
 
@@ -9,11 +22,17 @@ uses
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
 
 type
+  /// <summary>
+  /// Dockable window that displays runtime log messages.
+  /// </summary>
   TFormLog = class(TForm)
     Header: TPanel;
     Memo: TMemo;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   public
+    /// <summary>
+    /// Adds a timestamped message to the log.
+    /// </summary>
     procedure Append(const AMessage: string);
   end;
 

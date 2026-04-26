@@ -1,4 +1,19 @@
-﻿unit Main.DM;
+﻿/// <summary>
+/// Main.DM
+/// DataModule for the reporting starter demo.
+/// </summary>
+///
+/// <remarks>
+/// Connects FireDAC datasets to the embedded FastReport invoice report and
+/// exports the selected invoice as a PDF.
+/// </remarks>
+///
+/// <copyright>
+/// Copyright © 2026 Olaf Monien
+/// Licensed under MIT
+/// </copyright>
+
+unit Main.DM;
 
 interface
 
@@ -13,6 +28,9 @@ uses
   frxSmartMemo, frCoreClasses, frxClass, frxDBSet, frxExportBaseDialog, frxExportPDF;
 
 type
+  /// <summary>
+  /// Owns the FireDAC datasets and FastReport invoice definition.
+  /// </summary>
   TDMMain = class(TDataModule)
     Connection: TFDConnection;
     QOrderOverview: TFDQuery;
@@ -51,10 +69,15 @@ type
     procedure ConnectionBeforeConnect(Sender: TObject);
   private
     function GetDBConfig: string;
-    { Private declarations }
   public
     property DBConfig: string read GetDBConfig;
+    /// <summary>
+    /// Reopens the order overview query.
+    /// </summary>
     procedure RefreshOrders;
+    /// <summary>
+    /// Prints and exports the invoice for the currently selected order.
+    /// </summary>
     procedure PrintInvoice;
   end;
 
@@ -72,8 +95,7 @@ uses
 
 procedure TDMMain.ConnectionBeforeConnect(Sender: TObject);
 begin
-  //Die Projekt-Optionen haben ein Post-Build Event, dass die DB-Datei aus dem DB-Verzeichnis ins Verzeichnis
-  //der EXE kopiert, wenn diese dort noch nicht existiert
+  // The project post-build event copies the database next to the executable.
   Connection.Params.Database := TPath.Combine(TPath.GetAppPath, 'Northwind.sqlite');
 end;
 
@@ -86,15 +108,13 @@ procedure TDMMain.PrintInvoice;
 begin
   ReportInvoice.PrepareReport;
 
-  //Rechnung anzeigen
-  //ReportInvoice.ShowReport;
+  // Use ShowReport while designing the report interactively.
+  // ReportInvoice.ShowReport;
 
-  //Rechnung drucken
-  // Gffs. ohne Dialog sofort zum Standarddrucker schicken
-  //ReportInvoice.PrintOptions.ShowDialog := false;
+  // Set ShowDialog to false to print directly to the default printer.
+  // ReportInvoice.PrintOptions.ShowDialog := false;
   ReportInvoice.Print;
 
-  //Report als PDF speichern
   PDFExport.ShowDialog := false;
   PDFExport.FileName := TPath.GetAppPath + Format('invoice_%s.pdf', [QOrderOrderID.AsString]);
   ReportInvoice.Export(PDFExport);
@@ -107,4 +127,3 @@ begin
 end;
 
 end.
-

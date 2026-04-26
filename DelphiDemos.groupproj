@@ -1,0 +1,96 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{C1170A15-0E24-4E1F-83C9-7F93DBCEB2F0}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Database Starter\source\Company.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Reporting Starter\source\Company.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="UDP\UDPClient.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="UDP\UDPServer.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="SimplePlugin\SimplePlugin.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="DockedWindows\DockedWindows.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="DatabaseStarter">
+        <MSBuild Projects="Database Starter\source\Company.dproj"/>
+    </Target>
+    <Target Name="DatabaseStarter:Clean">
+        <MSBuild Projects="Database Starter\source\Company.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DatabaseStarter:Make">
+        <MSBuild Projects="Database Starter\source\Company.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ReportingStarter">
+        <MSBuild Projects="Reporting Starter\source\Company.dproj"/>
+    </Target>
+    <Target Name="ReportingStarter:Clean">
+        <MSBuild Projects="Reporting Starter\source\Company.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ReportingStarter:Make">
+        <MSBuild Projects="Reporting Starter\source\Company.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="UDPClient">
+        <MSBuild Projects="UDP\UDPClient.dproj"/>
+    </Target>
+    <Target Name="UDPClient:Clean">
+        <MSBuild Projects="UDP\UDPClient.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="UDPClient:Make">
+        <MSBuild Projects="UDP\UDPClient.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="UDPServer">
+        <MSBuild Projects="UDP\UDPServer.dproj"/>
+    </Target>
+    <Target Name="UDPServer:Clean">
+        <MSBuild Projects="UDP\UDPServer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="UDPServer:Make">
+        <MSBuild Projects="UDP\UDPServer.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SimplePlugin">
+        <MSBuild Projects="SimplePlugin\SimplePlugin.dproj"/>
+    </Target>
+    <Target Name="SimplePlugin:Clean">
+        <MSBuild Projects="SimplePlugin\SimplePlugin.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SimplePlugin:Make">
+        <MSBuild Projects="SimplePlugin\SimplePlugin.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DockedWindows">
+        <MSBuild Projects="DockedWindows\DockedWindows.dproj"/>
+    </Target>
+    <Target Name="DockedWindows:Clean">
+        <MSBuild Projects="DockedWindows\DockedWindows.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DockedWindows:Make">
+        <MSBuild Projects="DockedWindows\DockedWindows.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="DatabaseStarter;ReportingStarter;UDPClient;UDPServer;SimplePlugin;DockedWindows"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="DatabaseStarter:Clean;ReportingStarter:Clean;UDPClient:Clean;UDPServer:Clean;SimplePlugin:Clean;DockedWindows:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="DatabaseStarter:Make;ReportingStarter:Make;UDPClient:Make;UDPServer:Make;SimplePlugin:Make;DockedWindows:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

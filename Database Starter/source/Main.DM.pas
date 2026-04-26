@@ -1,4 +1,19 @@
-﻿unit Main.DM;
+﻿/// <summary>
+/// Main.DM
+/// DataModule for the database starter demo.
+/// </summary>
+///
+/// <remarks>
+/// Configures the FireDAC SQLite connection at runtime and provides a focused
+/// refresh method for the order overview query.
+/// </remarks>
+///
+/// <copyright>
+/// Copyright © 2026 Olaf Monien
+/// Licensed under MIT
+/// </copyright>
+
+unit Main.DM;
 
 interface
 
@@ -9,6 +24,9 @@ uses
   FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet;
 
 type
+  /// <summary>
+  /// Owns the FireDAC SQLite connection and order query.
+  /// </summary>
   TDMMain = class(TDataModule)
     Connection: TFDConnection;
     QOrders: TFDQuery;
@@ -29,9 +47,11 @@ type
     procedure ConnectionBeforeConnect(Sender: TObject);
   private
     function GetDBConfig: string;
-    { Private declarations }
   public
     property DBConfig: string read GetDBConfig;
+    /// <summary>
+    /// Reopens the order query.
+    /// </summary>
     procedure RefreshOrders;
   end;
 
@@ -49,8 +69,7 @@ uses
 
 procedure TDMMain.ConnectionBeforeConnect(Sender: TObject);
 begin
-  //Die Projekt-Optionen haben ein Post-Build Event, dass die DB-Datei aus dem DB-Verzeichnis ins Verzeichnis
-  //der EXE kopiert, wenn diese dort noch nicht existiert
+  // The project post-build event copies the database next to the executable.
   Connection.Params.Database := TPath.Combine(TPath.GetAppPath, 'Northwind.sqlite');
 end;
 
@@ -66,4 +85,3 @@ begin
 end;
 
 end.
-

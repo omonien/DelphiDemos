@@ -1,9 +1,23 @@
-﻿unit SimplePlugin.Example;
+﻿/// <summary>
+/// SimplePlugin.Example
+/// Minimal Delphi IDE plugin using the Open Tools API.
+/// </summary>
+///
+/// <remarks>
+/// Registers an IDE wizard and adds a simple command to the Tools menu.
+/// </remarks>
+///
+/// <copyright>
+/// Copyright © 2026 Olaf Monien
+/// Licensed under MIT
+/// </copyright>
+
+unit SimplePlugin.Example;
 
 interface
 uses
   System.SysUtils,
-  ToolsAPI, // Open Tools API
+  ToolsAPI,
   Vcl.Menus,
   Vcl.Dialogs;
 
@@ -13,22 +27,22 @@ procedure Register;
 implementation
 
 type
+  /// <summary>
+  /// Registers a minimal IDE wizard and Tools menu command.
+  /// </summary>
   TSimplePlugin = class(TInterfacedObject, IOTAWizard, IOTANotifier)
   private
     FMenuItem: TMenuItem;
     procedure MenuClick(Sender: TObject);
   public
-    // IOTAWizard methods
     function GetIDString: string;
     function GetName: string;
     function GetState: TWizardState;
     procedure Execute;
-    // IOTANotifier methods
     procedure AfterSave;
     procedure BeforeSave;
     procedure Destroyed;
     procedure Modified;
-    // Lifecycle methods
     constructor Create;
     destructor Destroy; override;
   end;
@@ -40,10 +54,8 @@ var
   NTAServices: INTAServices;
 begin
   inherited Create;
-  // Get the IDE's main services
   if Supports(BorlandIDEServices, INTAServices, NTAServices) then
   begin
-    // Create a new menu item under the Tools menu
     FMenuItem := TMenuItem.Create(nil);
     FMenuItem.Caption := 'Show Simple Message';
     FMenuItem.OnClick := MenuClick;
@@ -65,17 +77,17 @@ end;
 
 function TSimplePlugin.GetIDString: string;
 begin
-  Result := 'SimplePluginWizard'; // Unique identifier for the plugin
+  Result := 'SimplePluginWizard';
 end;
 
 function TSimplePlugin.GetName: string;
 begin
-  Result := 'Simple Plugin'; // Display name in the IDE
+  Result := 'Simple Plugin';
 end;
 
 function TSimplePlugin.GetState: TWizardState;
 begin
-  Result := [wsEnabled]; // Plugin is always enabled
+  Result := [wsEnabled];
 end;
 
 procedure TSimplePlugin.MenuClick(Sender: TObject);
@@ -83,25 +95,20 @@ begin
   ShowMessage('You clicked the Simple Plugin menu item!');
 end;
 
-// IOTANotifier implementations (empty for this simple example)
 procedure TSimplePlugin.AfterSave;
 begin
-  // No action needed
 end;
 
 procedure TSimplePlugin.BeforeSave;
 begin
-  // No action needed
 end;
 
 procedure TSimplePlugin.Destroyed;
 begin
-  // No action needed
 end;
 
 procedure TSimplePlugin.Modified;
 begin
-  // No action needed
 end;
 
 procedure Register;

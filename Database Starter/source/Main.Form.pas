@@ -1,4 +1,19 @@
-﻿unit Main.Form;
+﻿/// <summary>
+/// Main.Form
+/// Main form for the database starter demo.
+/// </summary>
+///
+/// <remarks>
+/// Displays orders from the shared DataModule and exposes a small refresh
+/// action for re-opening the FireDAC query.
+/// </remarks>
+///
+/// <copyright>
+/// Copyright © 2026 Olaf Monien
+/// Licensed under MIT
+/// </copyright>
+
+unit Main.Form;
 
 interface
 
@@ -8,6 +23,9 @@ uses
   Main.DM, Vcl.StdCtrls, Vcl.AppEvnts;
 
 type
+  /// <summary>
+  /// Displays the order overview from the database starter DataModule.
+  /// </summary>
   TFormMain = class(TForm)
     DBGrid1: TDBGrid;
     Panel1: TPanel;
@@ -16,10 +34,6 @@ type
     LabelDatabase: TLabel;
     procedure ButtonRefreshClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-  private
-    { Private declarations }
-  public
-    { Public declarations }
   end;
 
 var
@@ -41,4 +55,3 @@ begin
 end;
 
 end.
-

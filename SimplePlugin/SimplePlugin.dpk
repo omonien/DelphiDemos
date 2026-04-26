@@ -1,4 +1,18 @@
-﻿package SimplePlugin;
+﻿/// <summary>
+/// SimplePlugin
+/// Design-time package for the simple Delphi IDE plugin demo.
+/// </summary>
+///
+/// <remarks>
+/// Loads the Open Tools API wizard implementation into the RAD Studio IDE.
+/// </remarks>
+///
+/// <copyright>
+/// Copyright © 2026 Olaf Monien
+/// Licensed under MIT
+/// </copyright>
+
+package SimplePlugin;
 
 {$R *.res}
 {$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}

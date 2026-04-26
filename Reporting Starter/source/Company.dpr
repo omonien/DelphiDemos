@@ -1,4 +1,19 @@
-﻿program Company;
+﻿/// <summary>
+/// Company
+/// Starts the reporting starter demo application.
+/// </summary>
+///
+/// <remarks>
+/// Creates the reporting DataModule before the main form so the form can load
+/// and print invoice data from the bundled SQLite database.
+/// </remarks>
+///
+/// <copyright>
+/// Copyright © 2026 Olaf Monien
+/// Licensed under MIT
+/// </copyright>
+
+program Company;
 
 uses
   Vcl.Forms,

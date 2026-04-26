@@ -14,24 +14,24 @@ object FormMainClient: TFormMainClient
     330
     241)
   TextHeight = 15
-  object Memo1: TMemo
+  object MemoMessages: TMemo
     Left = 8
     Top = 39
     Width = 314
     Height = 194
     Anchors = [akLeft, akTop, akRight, akBottom]
     Lines.Strings = (
-      'Memo1')
+      '')
     TabOrder = 0
   end
-  object Button1: TButton
+  object ButtonReceive: TButton
     Left = 8
     Top = 8
     Width = 75
     Height = 25
     Caption = 'receive'
     TabOrder = 1
-    OnClick = Button1Click
+    OnClick = ButtonReceiveClick
   end
   object UDPClient: TIdUDPClient
     BoundIP = '127.0.0.1'

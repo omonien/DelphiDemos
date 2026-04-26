@@ -1,4 +1,19 @@
-﻿unit Main.Form;
+﻿/// <summary>
+/// Main.Form
+/// Main form for the reporting starter demo.
+/// </summary>
+///
+/// <remarks>
+/// Shows the order overview and delegates invoice generation to the reporting
+/// DataModule when the user double-clicks an order.
+/// </remarks>
+///
+/// <copyright>
+/// Copyright © 2026 Olaf Monien
+/// Licensed under MIT
+/// </copyright>
+
+unit Main.Form;
 
 interface
 
@@ -8,6 +23,9 @@ uses
   Main.DM, Vcl.StdCtrls, Vcl.AppEvnts;
 
 type
+  /// <summary>
+  /// Displays the order overview and triggers invoice printing.
+  /// </summary>
   TFormMain = class(TForm)
     DBGrid1: TDBGrid;
     Panel1: TPanel;
@@ -17,10 +35,6 @@ type
     procedure ButtonRefreshClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-  private
-    { Private declarations }
-  public
-    { Public declarations }
   end;
 
 var
@@ -47,4 +61,3 @@ begin
 end;
 
 end.
-

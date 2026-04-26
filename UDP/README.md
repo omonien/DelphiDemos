@@ -19,10 +19,8 @@ UDP/
 ├── UDPServer.dpr/.dproj
 ├── UDPServer.Main.Form.pas/.dfm
 ├── UDPClient.dpr/.dproj
-└── UPDClient.Main.Form.pas/.dfm
+└── UDPClient.Main.Form.pas/.dfm
 ```
-
-Note: the client unit is historically named `UPDClient.Main.Form.pas` instead of `UDPClient.Main.Form.pas`. It is just a file name, not a separate concept.
 
 ## Getting Started
 
@@ -38,9 +36,9 @@ The sample text intentionally contains umlauts and Hebrew characters. This makes
 ## Interesting Code
 
 - `UDPServer.Main.Form.pas`: `TEncoding.UTF8.GetBytes` and `UDPServer.SendBuffer`.
-- `UPDClient.Main.Form.pas`: `UDPClient.Active`, `ReceiveBuffer`, and `TEncoding.UTF8.GetString`.
+- `UDPClient.Main.Form.pas`: `UDPClient.Active`, `ReceiveBuffer`, and `TEncoding.UTF8.GetString`.
 - `UDPServer.Main.Form.dfm`: `DefaultPort = 7777`.
-- `UPDClient.Main.Form.dfm`: `BoundIP = '127.0.0.1'` and `BoundPort = 7777`.
+- `UDPClient.Main.Form.dfm`: `BoundIP = '127.0.0.1'` and `BoundPort = 7777`.
 
 ## Things To Try
 

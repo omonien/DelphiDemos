@@ -1,7 +1,19 @@
-unit DockedWindows.Properties.Form;
+﻿/// <summary>
+/// DockedWindows.Properties.Form
+/// Dockable property inspector form for the docking demo.
+/// </summary>
+///
+/// <remarks>
+/// Shows a small object-inspector-style grid and uses the same VCL docking
+/// behavior as the other tool windows.
+/// </remarks>
+///
+/// <copyright>
+/// Copyright © 2026 Olaf Monien
+/// Licensed under MIT
+/// </copyright>
 
-// Tool window with a small object-inspector style grid. Dockable just like
-// FormToolbox - the magic is purely in DragKind / DragMode (.dfm).
+unit DockedWindows.Properties.Form;
 
 interface
 
@@ -10,6 +22,9 @@ uses
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Grids;
 
 type
+  /// <summary>
+  /// Dockable property inspector style window.
+  /// </summary>
   TFormProperties = class(TForm)
     Header: TPanel;
     Grid: TStringGrid;

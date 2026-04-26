@@ -1,3 +1,18 @@
+﻿/// <summary>
+/// DockedWindows
+/// Starts the docked windows VCL demo application.
+/// </summary>
+///
+/// <remarks>
+/// Creates the main form and its dockable tool windows so the VCL docking
+/// framework can arrange them at startup.
+/// </remarks>
+///
+/// <copyright>
+/// Copyright © 2026 Olaf Monien
+/// Licensed under MIT
+/// </copyright>
+
 program DockedWindows;
 
 uses

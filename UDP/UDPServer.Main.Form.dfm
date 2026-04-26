@@ -11,16 +11,16 @@ object FormMainServer: TFormMainServer
   Font.Name = 'Segoe UI'
   Font.Style = []
   TextHeight = 15
-  object Button1: TButton
+  object ButtonSend: TButton
     Left = 255
     Top = 8
     Width = 75
     Height = 25
     Caption = 'Send'
     TabOrder = 0
-    OnClick = Button1Click
+    OnClick = ButtonSendClick
   end
-  object Edit1: TEdit
+  object EditMessage: TEdit
     Left = 8
     Top = 8
     Width = 241

@@ -1,4 +1,19 @@
-﻿program Company;
+﻿/// <summary>
+/// Company
+/// Starts the database starter demo application.
+/// </summary>
+///
+/// <remarks>
+/// Creates the shared DataModule first so the main form can open and display
+/// order data from the bundled SQLite database.
+/// </remarks>
+///
+/// <copyright>
+/// Copyright © 2026 Olaf Monien
+/// Licensed under MIT
+/// </copyright>
+
+program Company;
 
 uses
   Vcl.Forms,
