@@ -1,7 +1,7 @@
 object FormMain: TFormMain
   Left = 0
   Top = 0
-  Caption = 'Docked Windows Demo - moderne Alternative zu MDI'
+  Caption = 'Docked Windows Demo - a modern alternative to MDI'
   ClientHeight = 640
   ClientWidth = 1080
   Color = clBtnFace
@@ -129,17 +129,17 @@ object FormMain: TFormMain
       Font.Name = 'Consolas'
       Font.Style = []
       Lines.Strings = (
-        '// Zentrale Arbeitsflaeche'
+        '// Central workspace'
         '//'
-        '// Statt MDI-Childs nutzt diese Demo:'
-        '//   - Dock-Panele (Links / Rechts / Unten)'
-        '//   - frei verschiebbare Werkzeug-Fenster (Toolbox, Properties, Log)'
-        '//   - per Drag&Drop andocken, abdocken, stapeln (Tabs)'
+        '// Instead of MDI children, this demo uses:'
+        '//   - dock panels (left / right / bottom)'
+        '//   - freely movable tool windows (Toolbox, Properties, Log)'
+        '//   - drag & drop to dock, undock and stack (tabs)'
         '//'
-        '// Probiere:'
-        '//   1. Titelleiste eines Werkzeug-Fensters greifen und herausziehen.'
-        '//   2. Auf ein anderes Dock-Panel ziehen oder uebereinander stapeln.'
-        '//   3. Menue "Ansicht" -> Layout zuruecksetzen.')
+        '// Try this:'
+        '//   1. Grab a tool window by its title bar and drag it out.'
+        '//   2. Drop it onto another dock panel, or stack it on an existing one.'
+        '//   3. Menu "View" -> Reset layout.')
       ParentFont = False
       TabOrder = 0
     end
@@ -156,15 +156,15 @@ object FormMain: TFormMain
     Left = 24
     Top = 56
     object miFile: TMenuItem
-      Caption = '&Datei'
+      Caption = '&File'
       object miFileExit: TMenuItem
-        Caption = '&Beenden'
+        Caption = 'E&xit'
         ShortCut = 32883
         OnClick = miFileExitClick
       end
     end
     object miView: TMenuItem
-      Caption = '&Ansicht'
+      Caption = '&View'
       OnClick = miViewClick
       object miViewToolbox: TMenuItem
         AutoCheck = True
@@ -174,7 +174,7 @@ object FormMain: TFormMain
       end
       object miViewProperties: TMenuItem
         AutoCheck = True
-        Caption = '&Eigenschaften'
+        Caption = '&Properties'
         ShortCut = 16501
         OnClick = miViewPropertiesClick
       end
@@ -188,7 +188,7 @@ object FormMain: TFormMain
         Caption = '-'
       end
       object miViewResetLayout: TMenuItem
-        Caption = 'Layout &zuruecksetzen'
+        Caption = '&Reset layout'
         OnClick = miViewResetLayoutClick
       end
     end

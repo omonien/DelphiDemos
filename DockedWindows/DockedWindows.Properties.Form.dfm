@@ -1,7 +1,7 @@
 object FormProperties: TFormProperties
   Left = 0
   Top = 0
-  Caption = 'Eigenschaften'
+  Caption = 'Properties'
   ClientHeight = 320
   ClientWidth = 240
   Color = clBtnFace
@@ -23,7 +23,7 @@ object FormProperties: TFormProperties
     Align = alTop
     Alignment = taLeftJustify
     BevelOuter = bvNone
-    Caption = '   Eigenschaften'
+    Caption = '   Properties'
     Color = clMenuBar
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText

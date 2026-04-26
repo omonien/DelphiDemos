@@ -1,6 +1,6 @@
 unit DockedWindows.Properties.Form;
 
-// Tool window with a small object inspector style grid. Dockable just like
+// Tool window with a small object-inspector style grid. Dockable just like
 // FormToolbox - the magic is purely in DragKind / DragMode (.dfm).
 
 interface
@@ -31,14 +31,14 @@ begin
   Grid.FixedRows := 1;
   Grid.FixedCols := 0;
 
-  Grid.Cells[0, 0] := 'Eigenschaft';
-  Grid.Cells[1, 0] := 'Wert';
+  Grid.Cells[0, 0] := 'Property';
+  Grid.Cells[1, 0] := 'Value';
 
   Grid.Cells[0, 1] := 'Name';        Grid.Cells[1, 1] := 'FormMain';
   Grid.Cells[0, 2] := 'Caption';     Grid.Cells[1, 2] := 'Docked Windows Demo';
   Grid.Cells[0, 3] := 'Width';       Grid.Cells[1, 3] := '1080';
   Grid.Cells[0, 4] := 'Height';      Grid.Cells[1, 4] := '640';
-  Grid.Cells[0, 5] := 'DockSite';    Grid.Cells[1, 5] := 'True (Panele)';
+  Grid.Cells[0, 5] := 'DockSite';    Grid.Cells[1, 5] := 'True (panels)';
   Grid.Cells[0, 6] := 'BorderStyle'; Grid.Cells[1, 6] := 'bsSizeable';
 
   Grid.ColWidths[0] := 110;

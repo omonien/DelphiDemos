@@ -22,7 +22,7 @@ object FormToolbox: TFormToolbox
     Align = alTop
     Alignment = taLeftJustify
     BevelOuter = bvNone
-    Caption = '   Werkzeuge'
+    Caption = '   Tools'
     Color = clMenuBar
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -38,7 +38,7 @@ object FormToolbox: TFormToolbox
     Top = 40
     Width = 196
     Height = 30
-    Caption = 'Neu'
+    Caption = 'New'
     TabOrder = 1
     OnClick = btnNewClick
   end
@@ -47,7 +47,7 @@ object FormToolbox: TFormToolbox
     Top = 76
     Width = 196
     Height = 30
-    Caption = 'Oeffnen...'
+    Caption = 'Open...'
     TabOrder = 2
     OnClick = btnOpenClick
   end
@@ -56,7 +56,7 @@ object FormToolbox: TFormToolbox
     Top = 112
     Width = 196
     Height = 30
-    Caption = 'Speichern'
+    Caption = 'Save'
     TabOrder = 3
     OnClick = btnSaveClick
   end
@@ -65,7 +65,7 @@ object FormToolbox: TFormToolbox
     Top = 148
     Width = 196
     Height = 30
-    Caption = 'Ausfuehren'
+    Caption = 'Run'
     TabOrder = 4
     OnClick = btnRunClick
   end

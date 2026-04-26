@@ -1,116 +1,112 @@
 # Docked Windows Demo
 
-Dieses Demo zeigt, wie man unter Delphi/VCL eine moderne Oberfläche mit
-**andockbaren Werkzeug-Fenstern** baut – als Alternative zum klassischen,
-mittlerweile in die Jahre gekommenen **MDI-Paradigma** (Multiple Document
-Interface).
+This demo shows how to build a modern user interface in Delphi/VCL with
+**dockable tool windows** as an alternative to the classic – and by now
+quite dated – **MDI paradigm** (Multiple Document Interface).
 
-Das Projekt enthält bewusst keine Datenbank, keine Logik, keine Zusatz-
-Komponenten. Es geht ausschließlich darum, das Docking-Konzept der VCL
-verständlich vorzuführen.
-
----
-
-## Warum kein MDI mehr?
-
-MDI – also `FormStyle = fsMDIForm` mit `fsMDIChild`-Fenstern in einer
-gemeinsamen Eltern-Client-Area – stammt aus den frühen 1990ern und gilt
-heute aus mehreren Gründen als problematisch:
-
-- **Microsoft selbst hat MDI faktisch begraben.** Schon in den
-  Windows-User-Experience-Guidelines wurde von MDI abgeraten; moderne
-  Office- und IDE-Oberflächen nutzen seit Langem Tab-Dokumente,
-  Tool-Windows und Docking statt MDI-Childs.
-- **Fenster im Fenster** ist für Anwender unübersichtlich: ein MDI-Child
-  kann nicht über die Hauptfenster-Grenze hinaus, lässt sich nicht auf
-  einen zweiten Monitor ziehen und konkurriert mit der Taskleiste.
-- **Multi-Monitor-Setups** sind heute der Normalfall. MDI bricht hier
-  konzeptionell.
-- **Hohe DPI / Skalierung** und moderne Themes vertragen sich mit dem
-  Mini-Desktop-im-Fenster eher schlecht.
-- **Barrierefreiheit, Touch und Tastaturnavigation** sind in MDI
-  schwächer als bei eigenständigen Top-Level-Fenstern.
-- **VCL-Pflege:** Rund um MDI passiert seit vielen Releases praktisch
-  nichts mehr; das Docking-Framework wird hingegen weiter genutzt
-  (u. a. in der Delphi-IDE selbst).
-
-Kurz: Wer heute eine neue VCL-Anwendung beginnt, sollte **nicht** mit
-`fsMDIForm` starten. Das tatsächliche Bedürfnis – mehrere Werkzeug- und
-Dokumentenansichten in einem Hauptfenster – löst man besser mit
-**Docking** und ggf. **Tab-Dokumenten** (`TPageControl`).
+The project deliberately contains no database, no business logic and no
+third-party components. The single goal is to demonstrate the VCL
+docking concept in a way that is easy to follow.
 
 ---
 
-## Das Konzept: Dock-Site + dockbares Fenster
+## Why not MDI anymore?
 
-Die VCL bringt ein vollständiges Docking-Framework mit Bordmitteln mit.
-Es besteht im Kern aus zwei Rollen:
+MDI – i.e. `FormStyle = fsMDIForm` together with `fsMDIChild` windows
+inside a shared parent client area – dates back to the early 1990s and
+is considered problematic today for several reasons:
 
-### 1. Dock-Site (das Ziel)
+- **Microsoft itself has effectively retired MDI.** The Windows User
+  Experience Guidelines have been advising against MDI for years;
+  modern Office and IDE-style applications have long since moved to
+  tabbed documents, tool windows and docking instead.
+- **A window inside a window** is confusing for users: an MDI child
+  cannot leave the parent's client area, cannot be moved to a second
+  monitor, and competes with the taskbar.
+- **Multi-monitor setups** are the norm today. MDI breaks down
+  conceptually here.
+- **High DPI and modern theming** do not play well with the
+  "mini-desktop inside a window" idea.
+- **Accessibility, touch and keyboard navigation** are weaker in MDI
+  than with proper top-level windows.
+- **VCL maintenance:** MDI has seen virtually no investment for many
+  releases. The docking framework, on the other hand, is actively used
+  (the Delphi IDE itself relies on it).
 
-Ein **Dock-Site** ist ein Container, in den Fenster aufgenommen werden
-können. Praktisch jeder `TWinControl`-Nachfahre kann eine Dock-Site
-sein. Im Demo nutzen wir `TPanel` mit:
-
-| Property            | Wert    | Bedeutung                                                   |
-| ------------------- | ------- | ----------------------------------------------------------- |
-| `DockSite`          | `True`  | Das Panel darf andockende Fenster aufnehmen.                |
-| `UseDockManager`    | `True`  | Mehrere angedockte Fenster werden vom DockManager verwaltet (Stapeln, Tabs, Splitter dazwischen). |
-| `Align`             | `alLeft` / `alRight` / `alBottom` | Position der Dock-Zone im Hauptfenster. |
-
-Dazu kommt jeweils ein `TSplitter`, damit der Anwender die Dock-Zonen
-zur Laufzeit frei vergrößern und verkleinern kann.
-
-### 2. Dockable Form (das andockende Fenster)
-
-Ein **dockbares Fenster** ist eine ganz normale `TForm`. Es wird zum
-Docking-Kandidaten allein durch zwei Properties:
-
-| Property    | Wert            | Bedeutung                                                                 |
-| ----------- | --------------- | ------------------------------------------------------------------------- |
-| `DragKind`  | `dkDock`        | Beim Ziehen an der Titelleiste startet kein normales Verschieben, sondern eine Dock-Operation. |
-| `DragMode`  | `dmAutomatic`   | Die VCL übernimmt das Drag&Drop-Handling automatisch – kein Code nötig. |
-
-Damit lässt sich das Fenster:
-
-- aus seiner aktuellen Dock-Site **herausziehen** → es schwebt frei
-  (Floating Window),
-- auf eine andere Dock-Site ziehen → es **dockt dort an**,
-- auf ein bereits angedocktes Fenster ziehen → es wird **gestapelt**
-  (Tab-Docking, dank `UseDockManager`),
-- per Code mit `ManualDock(Ziel, nil, alClient)` programmatisch
-  irgendwohin platzieren.
-
-### Floating vs. Docked
-
-- **Docked:** Das Fenster sitzt in einer Dock-Site, hat keine eigene
-  Caption-Bar im klassischen Sinn mehr und teilt sich den Platz mit der
-  Site.
-- **Floating:** Das Fenster schwebt als eigenständiges Top-Level-Fenster
-  über dem Bildschirm, lässt sich auf einen zweiten Monitor verschieben,
-  hat eigene Taskbar-Repräsentation – also genau das, was MDI nicht
-  konnte.
-
-`HostDockSite` ist die zentrale Property, um zu unterscheiden:
-`nil` ⇒ floating, sonst ⇒ angedockt.
+In short: when starting a new VCL application today, do **not** reach
+for `fsMDIForm`. The actual requirement – several tool and document
+views inside a single main window – is better solved with **docking**
+and, where appropriate, **tabbed documents** (`TPageControl`).
 
 ---
 
-## Aufbau des Demos
+## The concept: dock site + dockable window
+
+The VCL ships with a complete docking framework out of the box. At its
+core there are two roles:
+
+### 1. Dock site (the target)
+
+A **dock site** is a container that can host docked windows. Almost any
+`TWinControl` descendant can be a dock site. In this demo we use
+`TPanel` with the following properties:
+
+| Property            | Value   | Meaning                                                      |
+| ------------------- | ------- | ------------------------------------------------------------ |
+| `DockSite`          | `True`  | The panel may accept windows that are docked into it.        |
+| `UseDockManager`    | `True`  | Multiple docked windows are arranged by the dock manager (stacking, tabs, splitters between them). |
+| `Align`             | `alLeft` / `alRight` / `alBottom` | Position of the dock zone inside the main form. |
+
+A `TSplitter` is placed next to each dock zone so the user can resize
+the zones at runtime.
+
+### 2. Dockable form (the window that docks)
+
+A **dockable window** is just a regular `TForm`. It becomes a docking
+candidate solely through two properties:
+
+| Property    | Value           | Meaning                                                                       |
+| ----------- | --------------- | ----------------------------------------------------------------------------- |
+| `DragKind`  | `dkDock`        | Dragging the title bar starts a dock operation instead of a regular move.     |
+| `DragMode`  | `dmAutomatic`   | The VCL handles drag & drop automatically – no code required.                 |
+
+This makes it possible to:
+
+- **tear** the form out of its current dock site so it floats freely
+  (floating window),
+- drag it onto another dock site so it **docks there**,
+- drag it onto an already docked window so it gets **stacked**
+  (tab docking, thanks to `UseDockManager`),
+- place it programmatically with `ManualDock(target, nil, alClient)`.
+
+### Floating vs. docked
+
+- **Docked:** The form sits inside a dock site, no longer has a regular
+  caption bar of its own and shares the available space with the site.
+- **Floating:** The form is a normal top-level window again. It can be
+  moved to a second monitor and has its own taskbar entry – exactly
+  what MDI never offered.
+
+The `HostDockSite` property is the easiest way to tell the two apart:
+`nil` means floating, anything else means docked.
+
+---
+
+## Project layout
 
 ```
 DockedWindows/
-├── DockedWindows.dpr                  Programmstart, erzeugt vier Forms
-├── DockedWindows.dproj                VCL-Projekt (Win32)
-├── DockedWindows.Main.Form.pas/.dfm   Hauptfenster, enthält die Dock-Sites
-├── DockedWindows.Toolbox.Form.pas/.dfm    dockbares Werkzeug-Fenster
-├── DockedWindows.Properties.Form.pas/.dfm dockbares Eigenschafts-Fenster
-└── DockedWindows.Log.Form.pas/.dfm        dockbares Log-Fenster
+├── DockedWindows.dpr                       Program entry, creates four forms
+├── DockedWindows.dproj                     VCL project (Win32)
+├── DockedWindows.Main.Form.pas/.dfm        Main form, hosts the dock sites
+├── DockedWindows.Toolbox.Form.pas/.dfm     Dockable tool window
+├── DockedWindows.Properties.Form.pas/.dfm  Dockable property inspector
+└── DockedWindows.Log.Form.pas/.dfm         Dockable log window
 ```
 
-### Hauptfenster (`TFormMain`)
+### Main form (`TFormMain`)
 
-Layout (alles auf einer einzigen, normalen `TForm` – kein MDI):
+Layout (one regular `TForm` – no MDI involved):
 
 ```
 +-----------------------------------------------------------+
@@ -129,89 +125,88 @@ Layout (alles auf einer einzigen, normalen `TForm` – kein MDI):
 +-----------------------------------------------------------+
 ```
 
-- `PanelLeft`, `PanelRight`, `PanelBottom` sind Dock-Sites.
-- `PanelCenter` (`Align = alClient`) ist die zentrale Arbeitsfläche.
-- Zwischen den Zonen sitzen `TSplitter`-Komponenten.
+- `PanelLeft`, `PanelRight`, `PanelBottom` are dock sites.
+- `PanelCenter` (`Align = alClient`) is the central workspace.
+- A `TSplitter` sits between every dock zone and the workspace.
 
-### Die drei dockbaren Fenster
+### The three dockable windows
 
-Jedes Tool-Fenster (`TFormToolbox`, `TFormProperties`, `TFormLog`) ist
-eine simple `TForm` mit `DragKind = dkDock` und `DragMode = dmAutomatic`.
-Im `OnClose`-Handler steht jeweils nur:
+Every tool form (`TFormToolbox`, `TFormProperties`, `TFormLog`) is just
+a plain `TForm` with `DragKind = dkDock` and `DragMode = dmAutomatic`.
+The `OnClose` handler simply contains:
 
 ```pascal
 procedure TFormToolbox.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  Action := caHide;     // schliessen = ausblenden, nicht freigeben
+  Action := caHide;     // closing means hide, not free
 end;
 ```
 
-So bleibt der Zustand erhalten und das Menü „Ansicht“ kann das Fenster
-einfach wieder einblenden.
+That way the form's state survives, and the *View* menu can simply make
+it visible again.
 
-### Initiales Layout
+### Initial layout
 
-Im `OnCreate` des Hauptfensters werden die Tool-Fenster per Code an
-ihren Startplatz gedockt:
+The main form's `OnCreate` docks the tool forms into their starting
+positions:
 
 ```pascal
 procedure TFormMain.ShowToolForm(AForm: TForm; ADockTarget: TWinControl);
 begin
   if AForm.HostDockSite <> nil then
-    AForm.ManualDock(nil, nil, alNone);          // ggf. erst loesen
-  AForm.ManualDock(ADockTarget, nil, alClient);  // an Ziel-Panel docken
+    AForm.ManualDock(nil, nil, alNone);          // detach first if needed
+  AForm.ManualDock(ADockTarget, nil, alClient);  // dock into the target panel
   AForm.Show;
 end;
 ```
 
-Das Menü „Ansicht → Layout zurücksetzen“ ruft genau diese Routine
-erneut auf und stellt damit den Auslieferungszustand wieder her.
+The *View → Reset layout* menu item simply calls this routine again to
+restore the original arrangement.
 
 ---
 
-## Was es zu testen gibt
+## Things to try at runtime
 
-1. **Andocken / Abdocken:** Titelleiste eines Werkzeug-Fensters greifen
-   und herausziehen → das Fenster schwebt frei. Wieder auf ein
-   Dock-Panel ziehen → es dockt dort an.
-2. **Stapeln (Tab-Docking):** Ein schwebendes Fenster auf ein bereits
-   angedocktes Fenster ziehen. Die VCL legt automatisch Tabs an
-   (Voraussetzung: `UseDockManager = True`).
-3. **Größen ändern:** Dock-Zonen mit den Splittern verkleinern und
-   vergrößern.
-4. **Schließen / Wieder anzeigen:** Werkzeug-Fenster schließen, danach
-   über Menü „Ansicht“ oder die Toolbar wieder einblenden.
-5. **Layout zurücksetzen:** Menü „Ansicht → Layout zurücksetzen“ stellt
-   die Ausgangsanordnung wieder her.
-6. **Multi-Monitor:** Ein abgedocktes Fenster lässt sich problemlos auf
-   einen zweiten Monitor ziehen – etwas, das MDI grundsätzlich nicht
-   konnte.
+1. **Dock / undock:** Grab the title bar of a tool window and drag it
+   away → the window starts floating. Drag it back onto a dock panel
+   → it docks there.
+2. **Stacking (tab docking):** Drag a floating window onto an already
+   docked window. The VCL automatically creates tabs (this requires
+   `UseDockManager = True`).
+3. **Resizing:** Drag the splitters to resize the dock zones.
+4. **Close / reopen:** Close a tool window, then bring it back via
+   the *View* menu or the toolbar.
+5. **Reset layout:** *View → Reset layout* restores the initial
+   arrangement.
+6. **Multi-monitor:** Drag an undocked window onto a second monitor –
+   something MDI fundamentally could not do.
 
 ---
 
-## Was hier bewusst weggelassen wurde
+## Things deliberately left out
 
-- **Layout-Persistenz:** Die VCL erlaubt das Speichern und Laden des
-  Dock-Zustands (`TDockTree.SaveToStream` / `LoadFromStream` bzw.
-  eigene Lösung über `HostDockSite`, `DockOrientation` …). Für ein
-  Einstiegsdemo macht das den Code unnötig schwer – das wäre ein
-  natürlicher nächster Schritt.
-- **Custom Dock-Manager:** Eigener Look & Feel beim Andocken (Pfeile,
-  Vorschau-Rechteck wie in der Delphi-IDE) wird nicht implementiert.
-- **Tab-Dokumente in der Mitte:** Die zentrale Arbeitsfläche ist hier
-  ein einfaches `TMemo`. In einer echten Anwendung würde dort meist ein
-  `TPageControl` mit Tabs sitzen – das ist die saubere Antwort auf
-  „mehrere offene Dokumente“ (statt MDI-Childs).
+- **Layout persistence:** The VCL allows the dock state to be saved
+  and restored (via `TDockTree.SaveToStream` / `LoadFromStream`, or
+  manually using `HostDockSite`, `DockOrientation` and friends). For a
+  starter demo this would only obscure the core idea – it is the
+  natural next step.
+- **Custom dock manager:** A custom look & feel for the docking
+  process (preview arrows / drop hints similar to the Delphi IDE) is
+  not implemented.
+- **Tabbed documents in the centre:** The central workspace is a
+  simple `TMemo` here. A real application would typically place a
+  `TPageControl` there – the proper modern answer to "several open
+  documents" (instead of MDI children).
 
 ---
 
-## Kurz-Glossar
+## Mini glossary
 
-| Begriff             | Bedeutung                                                                 |
-| ------------------- | ------------------------------------------------------------------------- |
-| MDI                 | Multiple Document Interface – Kind-Fenster innerhalb eines Eltern-Fensters. Veraltet. |
-| Dock-Site           | Container, der andockende Fenster aufnehmen kann (`DockSite = True`).     |
-| Dockable Form       | Fenster, das per Drag&Drop andocken kann (`DragKind = dkDock`).           |
-| Floating            | Das Fenster ist nicht angedockt, sondern schwebt eigenständig.            |
-| Host Dock Site      | Aktuelle Dock-Site eines Fensters; `nil` wenn floating.                   |
-| Dock Manager        | Verwaltet mehrere angedockte Kinder einer Dock-Site (Splitter, Tabs).     |
+| Term            | Meaning                                                                          |
+| --------------- | -------------------------------------------------------------------------------- |
+| MDI             | Multiple Document Interface – child windows inside a parent window. Outdated.    |
+| Dock site       | Container that can accept docked windows (`DockSite = True`).                    |
+| Dockable form   | Window that can be docked via drag & drop (`DragKind = dkDock`).                 |
+| Floating        | The window is not docked; it is a regular top-level window.                      |
+| Host dock site  | The dock site a form currently lives in; `nil` while floating.                   |
+| Dock manager    | Arranges multiple children of a dock site (splitters, tabs).                     |

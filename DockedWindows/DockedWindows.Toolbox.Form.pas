@@ -43,22 +43,22 @@ end;
 
 procedure TFormToolbox.btnNewClick(Sender: TObject);
 begin
-  FormMain.Log('Toolbox: Neu');
+  FormMain.Log('Toolbox: New');
 end;
 
 procedure TFormToolbox.btnOpenClick(Sender: TObject);
 begin
-  FormMain.Log('Toolbox: Oeffnen');
+  FormMain.Log('Toolbox: Open');
 end;
 
 procedure TFormToolbox.btnSaveClick(Sender: TObject);
 begin
-  FormMain.Log('Toolbox: Speichern');
+  FormMain.Log('Toolbox: Save');
 end;
 
 procedure TFormToolbox.btnRunClick(Sender: TObject);
 begin
-  FormMain.Log('Toolbox: Ausfuehren');
+  FormMain.Log('Toolbox: Run');
 end;
 
 end.

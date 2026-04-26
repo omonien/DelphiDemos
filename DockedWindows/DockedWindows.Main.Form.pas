@@ -1,6 +1,6 @@
 unit DockedWindows.Main.Form;
 
-// Demo: Modern docked windows as an alternative to the legacy MDI mechanism.
+// Demo: modern docked windows as an alternative to the legacy MDI mechanism.
 //
 // Key ingredients (all built-in VCL, no third-party libraries):
 //   - The main form contains TPanel dock sites (DockSite = True, UseDockManager = True)
@@ -72,9 +72,9 @@ uses
 
 procedure TFormMain.FormCreate(Sender: TObject);
 begin
-  StatusBar.SimpleText := 'Tipp: Werkzeugfenster an der Titelleiste packen und ziehen - frei schweben oder andocken.';
+  StatusBar.SimpleText := 'Tip: grab a tool window by its title bar and drag it - float it freely or dock it elsewhere.';
   DockInitialLayout;
-  Log('Anwendung gestartet.');
+  Log('Application started.');
 end;
 
 procedure TFormMain.DockInitialLayout;
@@ -149,7 +149,7 @@ end;
 procedure TFormMain.miViewResetLayoutClick(Sender: TObject);
 begin
   DockInitialLayout;
-  Log('Layout zurueckgesetzt.');
+  Log('Layout reset.');
 end;
 
 end.
